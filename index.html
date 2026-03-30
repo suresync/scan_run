@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scan Run | Delivery Board</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Delivery Board</h1>
+      <p>Plan work from architecture to execution.</p>
+    </header>
+
+    <main class="layout" aria-label="Task planner">
+      <section class="panel form-panel" aria-labelledby="create-task-heading">
+        <h2 id="create-task-heading">Create task</h2>
+        <form id="task-form">
+          <label for="task-title">Title</label>
+          <input id="task-title" name="title" type="text" required maxlength="80" />
+
+          <label for="task-description">Description</label>
+          <textarea id="task-description" name="description" rows="4" maxlength="280"></textarea>
+
+          <div class="row">
+            <div>
+              <label for="task-priority">Priority</label>
+              <select id="task-priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="task-status">Status</label>
+              <select id="task-status" name="status">
+                <option value="backlog" selected>Backlog</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit">Add task</button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="filter-heading">
+        <h2 id="filter-heading">Filters</h2>
+        <div class="filters">
+          <label for="filter-status">Status</label>
+          <select id="filter-status">
+            <option value="all" selected>All</option>
+            <option value="backlog">Backlog</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+
+          <label for="filter-priority">Priority</label>
+          <select id="filter-priority">
+            <option value="all" selected>All</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+
+          <label for="search">Search</label>
+          <input id="search" type="search" placeholder="Search title or description" />
+        </div>
+
+        <div id="stats" class="stats" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="board-heading">
+        <div class="board-header">
+          <h2 id="board-heading">Board</h2>
+          <button id="clear-completed" class="secondary">Clear completed</button>
+        </div>
+        <ul id="task-list" class="task-list" aria-label="Task list"></ul>
+      </section>
+    </main>
+
+    <template id="task-template">
+      <li class="task-item">
+        <article>
+          <header>
+            <h3 class="task-title"></h3>
+            <span class="badge task-priority"></span>
+          </header>
+          <p class="task-description"></p>
+          <div class="meta">
+            <label>
+              Status
+              <select class="task-status-select">
+                <option value="backlog">Backlog</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </label>
+            <div class="actions">
+              <button class="secondary edit-btn" type="button">Edit</button>
+              <button class="danger delete-btn" type="button">Delete</button>
+            </div>
+          </div>
+        </article>
+      </li>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
